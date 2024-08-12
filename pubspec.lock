@@ -97,10 +97,9 @@ packages:
   flutter_naver_map:
     dependency: "direct main"
     description:
-      name: flutter_naver_map
-      sha256: "61e70a8efbae604f088a7554139784e052363ca5cb13b477745871c6f7a24d6e"
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/flutter_naver_map"
+      relative: true
+    source: path
     version: "1.2.3+1"
   flutter_test:
     dependency: "direct dev"

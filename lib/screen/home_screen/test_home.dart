@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:hexagonal_app/manage/constants/color_table.dart';
 import 'package:hexagonal_app/manage/data/yongin_cords.dart';
 
 class TestHome extends StatefulWidget {
@@ -34,7 +35,7 @@ class _TestHomeState extends State<TestHome> {
         logoClickEnable: false,
         initialCameraPosition: NCameraPosition(
           target: NLatLng(37.2412522, 127.1774916),
-          zoom: 10,
+          zoom: 14,
         ),
         extent: NLatLngBounds(
           southWest: NLatLng(37.0803988, 127.034457),
@@ -50,23 +51,29 @@ class _TestHomeState extends State<TestHome> {
   Future<void> _addPolygonOverlay() async {
     final mapController = await mapControllerCompleter.future;
 
-    // NLatLng 리스트로 변환 (정방향)
-    List<NLatLng> latLngCoords =
+    // 외곽선이 될 큰 사각형 좌표 설정 (화면을 모두 덮는 좌표)
+    List<NLatLng> outerCoords = [
+      const NLatLng(38.000000, 126.5000000), // top-left
+      const NLatLng(38.000000, 128.0000000), // top-right
+      const NLatLng(36.0000000, 128.0000000), // bottom-right
+      const NLatLng(36.0000000, 126.5000000), // bottom-left
+      const NLatLng(38.00000, 126.5000000), // close the loop
+    ];
+
+    // yonginCoords를 NLatLng 리스트로 변환
+    List<NLatLng> holeCoords =
         coords.map((coord) => NLatLng(coord[1], coord[0])).toList();
 
-    // NLatLng 리스트로 변환 (반대 방향)
-    // List<NLatLng> reversedLatLngCoords = latLngCoords.reversed.toList();
-
-    // NPolygonOverlayCustom을 생성하고 지도에 추가
+    // NPolygonOverlay 생성
     final polygonOverlay = NPolygonOverlay(
       id: 'maskOverlay',
-      coords: latLngCoords, // yourCoords는 다각형의 경계선 좌표들
-      color: Colors.black.withOpacity(0.5), // 전체 영역의 색상 (반투명 검정)
-      outlineColor: Colors.red, // 외곽선 색상
+      coords: outerCoords, // 외곽선 좌표
+      holes: [holeCoords], // yonginCoords를 holes로 설정
+      color: AppColors.black.withOpacity(0.9),
+      outlineColor: AppColors.blue.withOpacity(0.3), // 외곽선 색상
       outlineWidth: 3, // 외곽선 두께
     );
 
-    polygonOverlay.createMaskOverlay(); // 다각형 내부를 비우고 나머지를 채움
     mapController.addOverlay(polygonOverlay); // 오버레이 추가
   }
 
