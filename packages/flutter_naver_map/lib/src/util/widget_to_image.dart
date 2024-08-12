@@ -39,9 +39,9 @@ class WidgetToImageUtil {
         RenderPositionedBox(alignment: Alignment.center, child: renderBox);
     final renderView = RenderView(
         view: view,
-        configuration: ViewConfiguration(
-            logicalConstraints: BoxConstraints.tight(size),
-            devicePixelRatio: view.devicePixelRatio),
+        configuration: const ViewConfiguration(
+            // window: view.platformDispatcher.implicitView!,
+            ),
         child: renderPositionedBox);
 
     final pipelineOwner = PipelineOwner()..rootNode = renderView;

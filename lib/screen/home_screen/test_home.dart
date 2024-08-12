@@ -35,7 +35,7 @@ class _TestHomeState extends State<TestHome> {
         logoClickEnable: false,
         initialCameraPosition: NCameraPosition(
           target: NLatLng(37.2412522, 127.1774916),
-          zoom: 14,
+          zoom: 12,
         ),
         extent: NLatLngBounds(
           southWest: NLatLng(37.0803988, 127.034457),

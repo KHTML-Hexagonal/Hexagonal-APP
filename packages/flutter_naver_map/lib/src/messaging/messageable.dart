@@ -1,5 +1,6 @@
 part of "messaging.dart";
 
+@internal
 class NMessageable {
   final dynamic payload;
 
@@ -12,6 +13,7 @@ class NMessageable {
   String toString() => "$runtimeType: $payload";
 }
 
+@internal
 mixin NMessageableWithMap implements NMessageable {
   @override
   Map<String, dynamic> get payload => toNPayload().map;
@@ -19,11 +21,13 @@ mixin NMessageableWithMap implements NMessageable {
   NPayload toNPayload();
 }
 
+@internal
 mixin NMessageableWithEnum on Enum implements NMessageable {
   @override
   dynamic get payload => name;
 }
 
+@internal
 class NPayload {
   final Map<String, dynamic> map;
 
@@ -39,6 +43,11 @@ class NPayload {
           {required String sign}) =>
       NPayload.make({...m, "sign": sign});
 
+  NPayload expandWith(Map<String, dynamic> m) {
+    final convertedM = _convertMapValueAsMessageable(m);
+    return NPayload._({...map, ...convertedM});
+  }
+
   static void _removeNull(Map<String, dynamic> m) =>
       m.removeWhere((key, value) => value == null);
 
@@ -51,35 +60,33 @@ class NPayload {
     if (value.isDefaultType) return value;
 
     assert(value is NMessageable ||
-        value is Iterable ||
+        value is List ||
         value is Locale ||
         value is EdgeInsets ||
         value is Size ||
         value is Color);
 
-    switch (value) {
-      case NMessageable():
-        return value.payload;
-      case Iterable():
-        return value.map((e) => convertToMessageable(e!)).toList();
-      default:
-        final result = _tryConvertFlutterUITypes(value);
-        if (result == null) {
-          throw UnsupportedError(
-              "Unsupported Messaging Type: ${value.runtimeType}");
-        }
-        return result;
+    if (value is NMessageable) return value.payload;
+    if (value is List) {
+      return value.map((e) => convertToMessageable(e!)).toList();
     }
+    return _convertFlutterTypes(value);
   }
 
-  static dynamic _tryConvertFlutterUITypes(Object value) {
-    return switch (value) {
-      Locale() => NLocale.fromLocale(value).payload,
-      EdgeInsets() => NEdgeInsets.fromEdgeInsets(value).payload,
-      Size() => NSize.fromSize(value).payload,
-      Color() => value.value,
-      _ => null,
-    };
+  static dynamic _convertFlutterTypes(Object value) {
+    if (value is Color) return value.value;
+
+    late final NMessageable nMessageable;
+
+    if (value is Locale) {
+      nMessageable = NLocale.fromLocale(value);
+    } else if (value is EdgeInsets) {
+      nMessageable = NEdgeInsets.fromEdgeInsets(value);
+    } else if (value is Size) {
+      nMessageable = NSize.fromSize(value);
+    }
+
+    return nMessageable.payload;
   }
 
   @override
