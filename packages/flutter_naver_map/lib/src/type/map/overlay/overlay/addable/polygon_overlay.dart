@@ -29,6 +29,7 @@ class NPolygonOverlay extends NAddableOverlay<NPolygonOverlay> {
   double _outlineWidth;
 
   @override
+  // ignore: prefer_final_fields
   int _globalZIndex = -200000;
 
   NPolygonOverlay({

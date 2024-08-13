@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'package:hexagonal_app/manage/constants/color_table.dart';
+import 'package:hexagonal_app/manage/constants/constants.dart';
 import 'package:hexagonal_app/manage/data/yongin_cords.dart';
 
 class TestHome extends StatefulWidget {
@@ -16,11 +18,36 @@ class _TestHomeState extends State<TestHome> {
 
   // 외곽선을 그리기 위한 좌표 리스트 정의 (일반 리스트)
   final List<List<double>> coords = yonginCoords;
+  List<YonginBuildingModel> yongingBuilding = [];
 
   @override
   void initState() {
     super.initState();
+    // _loadAndAddOldBuilding();
     _addPolygonOverlay();
+  }
+
+  Future<void> _loadAndAddOldBuilding() async {
+    // JSON 데이터를 불러와 yongingBuilding 변수에 할당
+    yongingBuilding = await _loadOldBuildingData();
+    // 데이터를 로드한 후, 마커를 지도에 추가
+    _addOldBuilding();
+  }
+
+  Future<void> _addOldBuilding() async {
+    final mapController = await mapControllerCompleter.future;
+    final markerManager = MapMarkerManager(context, mapController);
+    await markerManager.addMarkersToMapForObject(yongingBuilding);
+  }
+
+  Future<List<YonginBuildingModel>> _loadOldBuildingData() async {
+    final String jsonString =
+        await rootBundle.loadString('lib/manage/data/old_building.json');
+    final List<dynamic> jsonResponse = json.decode(jsonString);
+
+    return jsonResponse
+        .map((data) => YonginBuildingModel.fromJson(data))
+        .toList();
   }
 
   Widget _buildNaverMap() {
