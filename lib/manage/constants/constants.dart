@@ -8,6 +8,9 @@ export 'package:hexagonal_app/manage/constants/icon_table.dart';
 //위젯
 export 'package:hexagonal_app/widget/bottom_navigation/gnb_tap.dart';
 export 'package:hexagonal_app/widget/map_marker_manager.dart';
+export 'package:hexagonal_app/widget/list/recommend_list.dart';
+export 'package:hexagonal_app/widget/chips/repair_chips.dart';
+export 'package:hexagonal_app/widget/divider/custom_divider.dart';
 
 //api관리
 export 'package:hexagonal_app/manage/api/naver_map_api.dart';

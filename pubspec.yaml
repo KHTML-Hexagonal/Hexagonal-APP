@@ -31,6 +31,8 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/num/
+    - assets/images/num_orange/
     - assets/icon/
     - lib/manage/data/
     - .env

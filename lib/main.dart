@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // SplashScreen에서 시스템 네비게이션 바 색상 설정
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        systemNavigationBarColor: AppColors.blue, // 네비게이션 바 색상
+        systemNavigationBarColor: AppColors.g00, // 네비게이션 바 색상
       ),
     );
 
@@ -68,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         );
         SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-          systemNavigationBarColor: AppColors.white, // 원래 색상으로 설정
+          systemNavigationBarColor: AppColors.g00, // 원래 색상으로 설정
         ));
       },
     );

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hexagonal_app/manage/constants/constants.dart';
 
-class MainHome extends StatefulWidget {
-  const MainHome({super.key});
+class SearchHome extends StatefulWidget {
+  const SearchHome({super.key});
 
   @override
-  MainHomeState createState() => MainHomeState();
+  SearchHomeState createState() => SearchHomeState();
 }
 
-class MainHomeState extends State<MainHome> {
+class SearchHomeState extends State<SearchHome> {
   final TextEditingController _controller = TextEditingController();
   String _result = '';
 

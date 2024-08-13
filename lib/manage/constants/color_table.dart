@@ -1,6 +1,31 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  // Gray Scale Colors
+  static const Color g00 = Color(0xFFFFFFFF);
+  static const Color g10 = Color(0xFFF4F4F4);
+  static const Color g20 = Color(0xFFE0E0E0);
+  static const Color g30 = Color(0xFFC8C8C8);
+  static const Color g40 = Color(0xFFA0A0A0);
+  static const Color g50 = Color(0xFF787878);
+  static const Color g60 = Color(0xFF565656);
+  static const Color g70 = Color(0xFF404040);
+  static const Color g80 = Color(0xFF121212);
+
+  // Orange Scale Colors
+  static const Color or10 = Color(0xFFFFF2E8);
+  static const Color or20 = Color(0xFFFFD9BE);
+  static const Color or30 = Color(0xFFFFB784);
+  static const Color or40 = Color(0xFFFF8933);
+  static const Color or50 = Color(0xFFEB6200);
+  static const Color or60 = Color(0xFFBA4E00);
+  static const Color or70 = Color(0xFF8A3800);
+  static const Color or80 = Color(0xFF5E2900);
+  static const Color or90 = Color(0xFF3E1A00);
+
+  // Active Color
+  static const Color active50 = Color(0xFFE63312);
+
   // Primary Colors
   static const Color bluebg = Color(0XFFF0F3FF); //0108변경_기존:F1FCFF
   static const Color bluelight = Color(0XFFB1C5F6); //0108변경_기존:9DECFF

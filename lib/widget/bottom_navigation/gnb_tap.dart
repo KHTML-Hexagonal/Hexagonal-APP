@@ -27,7 +27,7 @@ class GnbTap extends StatelessWidget {
       child: GestureDetector(
         onTap: () => onTap(),
         child: Container(
-          color: AppColors.white,
+          color: AppColors.g00,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -39,7 +39,7 @@ class GnbTap extends StatelessWidget {
                   fontFamily: 'pretendard',
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
-                  color: isSelected ? AppColors.g5 : AppColors.g3,
+                  color: isSelected ? AppColors.g70 : AppColors.g30,
                 ),
               ),
             ],

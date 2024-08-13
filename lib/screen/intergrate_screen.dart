@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexagonal_app/manage/constants/constants.dart';
 import 'package:hexagonal_app/manage/constants/screen_manage.dart';
-import 'package:hexagonal_app/screen/home_screen/test_home.dart';
+import 'package:hexagonal_app/screen/test/test_home.dart';
 
 enum SwitchIndex {
   none,
@@ -38,7 +38,7 @@ class IntergrateScreen extends StatefulWidget {
 }
 
 class _IntergrateScreenState extends State<IntergrateScreen> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -84,17 +84,17 @@ class _IntergrateScreenState extends State<IntergrateScreen> {
   Widget _getCurrentScreen() {
     switch (_selectedIndex) {
       case 0:
-        return const MainHome();
+        return const HomeMain();
       case 1:
         return const TestHome();
 
       case 2:
-        return const MainHome();
+        return const SearchHome();
       case 3:
-        return const MainHome();
+        return const SearchHome();
       case 4:
       default:
-        return const MainHome();
+        return const SearchHome();
     }
   }
 
@@ -114,7 +114,7 @@ class _IntergrateScreenState extends State<IntergrateScreen> {
               children: [
                 // 각 탭 구성
                 GnbTap(
-                  text: '교외 지원',
+                  text: '홈',
                   isSelected: _selectedIndex == 0,
                   onTap: () => _onTap(0),
                   selectedIndex: _selectedIndex,
@@ -122,7 +122,7 @@ class _IntergrateScreenState extends State<IntergrateScreen> {
                   unselecetedIcon: const Icon(Icons.home),
                 ),
                 GnbTap(
-                  text: '교내 지원',
+                  text: '내 지역',
                   isSelected: _selectedIndex == 1,
                   onTap: () => _onTap(1),
                   selectedIndex: _selectedIndex,
@@ -130,7 +130,7 @@ class _IntergrateScreenState extends State<IntergrateScreen> {
                   unselecetedIcon: const Icon(Icons.home),
                 ),
                 GnbTap(
-                  text: '홈',
+                  text: '건축 자제',
                   isSelected: _selectedIndex == 2,
                   onTap: () => _onTap(2),
                   selectedIndex: _selectedIndex,
@@ -138,7 +138,7 @@ class _IntergrateScreenState extends State<IntergrateScreen> {
                   unselecetedIcon: const Icon(Icons.home),
                 ),
                 GnbTap(
-                  text: '로드맵',
+                  text: '마이페이지',
                   isSelected: _selectedIndex == 3,
                   onTap: () => _onTap(3),
                   selectedIndex: _selectedIndex,

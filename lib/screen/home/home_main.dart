@@ -6,19 +6,20 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:hexagonal_app/manage/constants/constants.dart';
 import 'package:hexagonal_app/manage/data/yongin_cords.dart';
 
-class TestHome extends StatefulWidget {
-  const TestHome({super.key});
+class HomeMain extends StatefulWidget {
+  const HomeMain({super.key});
 
   @override
-  State<TestHome> createState() => _TestHomeState();
+  State<HomeMain> createState() => _HomeMainState();
 }
 
-class _TestHomeState extends State<TestHome> {
+class _HomeMainState extends State<HomeMain> {
   final Completer<NaverMapController> mapControllerCompleter = Completer();
 
   // 외곽선을 그리기 위한 좌표 리스트 정의 (일반 리스트)
   final List<List<double>> coords = yonginCoords;
   List<YonginBuildingModel> yongingBuilding = [];
+  int itemCount = 4;
 
   @override
   void initState() {
@@ -57,7 +58,7 @@ class _TestHomeState extends State<TestHome> {
         indoorEnable: true,
         locationButtonEnable: false,
         consumeSymbolTapEvents: true,
-        logoMargin: EdgeInsets.only(bottom: 30, left: 24),
+        logoMargin: EdgeInsets.only(bottom: 50, left: 24),
         logoAlign: NLogoAlign.leftBottom,
         logoClickEnable: false,
         initialCameraPosition: NCameraPosition(
@@ -96,12 +97,87 @@ class _TestHomeState extends State<TestHome> {
       id: 'maskOverlay',
       coords: outerCoords, // 외곽선 좌표
       holes: [holeCoords], // yonginCoords를 holes로 설정
-      color: AppColors.black.withOpacity(0.9),
-      outlineColor: AppColors.blue.withOpacity(0.3), // 외곽선 색상
+      color: AppColors.g80.withOpacity(0.9),
+      outlineColor: AppColors.g80.withOpacity(0.3), // 외곽선 색상
       outlineWidth: 3, // 외곽선 두께
     );
 
     mapController.addOverlay(polygonOverlay); // 오버레이 추가
+  }
+
+  Widget dangerListModal() {
+    return DraggableScrollableSheet(
+      snap: true,
+      minChildSize: 0.35,
+      maxChildSize: 0.9,
+      initialChildSize: 0.35,
+      builder: (BuildContext context, ScrollController scrollController) {
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          height: MediaQuery.of(context).size.height * 0.9,
+          width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(
+            color: AppColors.g00,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          ),
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                controller: scrollController,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Gaps.v44,
+                    Text('추천 봉사 장소 ',
+                        style:
+                            AppTextStyles.st2.copyWith(color: AppColors.g80)),
+                    Gaps.v8,
+                    ...List.generate(
+                      itemCount,
+                      (index) => Column(
+                        children: [
+                          const RecommendServiceList(
+                            thisUniqueBuildingId: '123123',
+                          ),
+                          if (index < itemCount - 1)
+                            const CustomDivider(thisHeight: 1)
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              IgnorePointer(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: AppColors.g00,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 16),
+                        height: 4,
+                        width: 32,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppColors.g20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -112,7 +188,11 @@ class _TestHomeState extends State<TestHome> {
       child: Scaffold(
         body: Stack(
           children: [
-            _buildNaverMap(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.65,
+              child: _buildNaverMap(),
+            ),
+            dangerListModal(),
           ],
         ),
       ),
