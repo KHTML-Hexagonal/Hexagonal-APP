@@ -55,11 +55,8 @@ class _OwnerIntergrateState extends State<OwnerIntergrate> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => OwnerRegComplete(
-                  response: response!,
-                  thisUniqueId: uniqueId,
-                  storedImages: image,
-                  addressText: addressText)));
+              builder: (context) =>
+                  HomeBuildingDetail(thisUniqueBuildingId: uniqueId)));
     } else {
       setState(() {
         _currentIndex = index;
