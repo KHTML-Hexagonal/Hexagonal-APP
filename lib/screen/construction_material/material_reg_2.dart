@@ -42,11 +42,7 @@ class _MaterialReg2State extends State<MaterialReg2> {
   }
 
   Future<NOverlayImage> _createOverlayImage() async {
-    return await NOverlayImage.fromWidget(
-      widget: AppIcon.circle_fill_x, //수정 필요
-      size: const Size(40, 40),
-      context: context,
-    );
+    return const NOverlayImage.fromAssetImage('assets/images/location.png');
   }
 
   Widget _buildNaverMap() {

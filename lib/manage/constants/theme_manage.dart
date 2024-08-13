@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexagonal_app/manage/constants/constants.dart';
+import 'package:hexagonal_app/manage/constants/font_table.dart';
 
 class ThemeManage {
   static ThemeData get theme {
@@ -23,6 +24,16 @@ class ThemeManage {
           fontWeight: FontWeight.w700,
         ),
       ),
+      tabBarTheme: TabBarTheme(
+          indicator: const BoxDecoration(
+            border: Border(bottom: BorderSide(color: AppColors.g6, width: 2)),
+          ),
+          indicatorSize: TabBarIndicatorSize.tab,
+          labelColor: AppColors.g6,
+          unselectedLabelColor: AppColors.g5,
+          labelStyle: AppTextStyles.bd1.copyWith(color: AppColors.g6),
+          unselectedLabelStyle:
+              AppTextStyles.bd2.copyWith(color: AppColors.g4)),
     );
   }
 }

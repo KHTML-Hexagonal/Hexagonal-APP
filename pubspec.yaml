@@ -37,6 +37,7 @@ flutter:
     - assets/images/
     - assets/images/num/
     - assets/images/num_orange/
+    - assets/images/screen_image/
     - assets/icon/
     - assets/icon/gnb_part/
     - lib/manage/data/

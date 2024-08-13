@@ -38,6 +38,7 @@ class _OwnerReg3State extends State<OwnerReg3> {
                     valueColor: AlwaysStoppedAnimation<Color>(AppColors.g20)))
             : SingleChildScrollView(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Gaps.v16,
                     SingleChildScrollView(

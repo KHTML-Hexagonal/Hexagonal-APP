@@ -12,6 +12,8 @@ class AppIcon {
       SvgPicture.asset('assets/icon/search.svg', fit: BoxFit.scaleDown);
   static Widget get circle_fill_x =>
       SvgPicture.asset('assets/icon/circle_fill_x.svg', fit: BoxFit.scaleDown);
+  static Widget get write_swhite =>
+      SvgPicture.asset('assets/icon/write_swhite.svg', fit: BoxFit.scaleDown);
 
   //Bottom Navigation part
   static Widget get home_active =>

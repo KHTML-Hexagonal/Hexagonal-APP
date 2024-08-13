@@ -37,7 +37,7 @@ class IntergrateScreen extends StatefulWidget {
 }
 
 class _IntergrateScreenState extends State<IntergrateScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   @override
   void initState() {
@@ -85,15 +85,15 @@ class _IntergrateScreenState extends State<IntergrateScreen> {
       case 0:
         return const HomeMain();
       case 1:
-        return const SearchHome();
+        return const LocationMain();
 
       case 2:
-        return const SearchHome();
+        return const MaterialMain();
       case 3:
-        return const SearchHome();
+        return const MypageMain();
       case 4:
       default:
-        return const SearchHome();
+        return const HomeMain();
     }
   }
 
@@ -117,32 +117,32 @@ class _IntergrateScreenState extends State<IntergrateScreen> {
                   isSelected: _selectedIndex == 0,
                   onTap: () => _onTap(0),
                   selectedIndex: _selectedIndex,
-                  selecetedIcon: const Icon(Icons.home),
-                  unselecetedIcon: const Icon(Icons.home),
+                  selecetedIcon: AppIcon.home_active,
+                  unselecetedIcon: AppIcon.home_inactive,
                 ),
                 GnbTap(
                   text: '내 지역',
                   isSelected: _selectedIndex == 1,
                   onTap: () => _onTap(1),
                   selectedIndex: _selectedIndex,
-                  selecetedIcon: const Icon(Icons.home),
-                  unselecetedIcon: const Icon(Icons.home),
+                  selecetedIcon: AppIcon.location_active,
+                  unselecetedIcon: AppIcon.location_inactive,
                 ),
                 GnbTap(
                   text: '건축 자제',
                   isSelected: _selectedIndex == 2,
                   onTap: () => _onTap(2),
                   selectedIndex: _selectedIndex,
-                  selecetedIcon: const Icon(Icons.home),
-                  unselecetedIcon: const Icon(Icons.home),
+                  selecetedIcon: AppIcon.inter_active,
+                  unselecetedIcon: AppIcon.inter_inactive,
                 ),
                 GnbTap(
                   text: '마이페이지',
                   isSelected: _selectedIndex == 3,
                   onTap: () => _onTap(3),
                   selectedIndex: _selectedIndex,
-                  selecetedIcon: const Icon(Icons.home),
-                  unselecetedIcon: const Icon(Icons.home),
+                  selecetedIcon: AppIcon.my_active,
+                  unselecetedIcon: AppIcon.my_inactive,
                 ),
               ],
             ),
