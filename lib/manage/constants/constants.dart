@@ -11,6 +11,9 @@ export 'package:hexagonal_app/widget/map_marker_manager.dart';
 export 'package:hexagonal_app/widget/list/recommend_list.dart';
 export 'package:hexagonal_app/widget/chips/repair_chips.dart';
 export 'package:hexagonal_app/widget/divider/custom_divider.dart';
+export 'package:hexagonal_app/widget/number_widget/number.dart';
+export 'package:hexagonal_app/widget/number_widget/number_orange.dart';
+export 'package:hexagonal_app/widget/chips/orange_chips.dart';
 
 //api관리
 export 'package:hexagonal_app/manage/api/naver_map_api.dart';

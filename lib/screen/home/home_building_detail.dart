@@ -15,6 +15,8 @@ class _HomeBuildingDetailState extends State<HomeBuildingDetail> {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzCk4Xm2Xo0Xdo5f34uw-svRzqSKAOhxqMFQ&s'
   ]; // 여러 개의 이미지 URL
 
+  final List<String> listText = ['안녕', '하늘', '곰마', '안녕', '하늘', '곰마', '안녕'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,6 +132,67 @@ class _HomeBuildingDetailState extends State<HomeBuildingDetail> {
                   style: AppTextStyles.st1.copyWith(color: AppColors.g80),
                 )),
             Gaps.v16,
+            const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      NumberWidget(thisNumber: 97, thisText: '한글'),
+                      NumberWidget(thisNumber: 97, thisText: '한글'),
+                      NumberWidget(thisNumber: 97, thisText: '한글'),
+                      NumberWidget(thisNumber: 97, thisText: '한글'),
+                      NumberOrangeWidget(thisNumber: 97, thisText: '한글')
+                    ])),
+            Container(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomDivider(thisHeight: 2),
+                  Gaps.v20,
+                  Text('보수 필요 항목',
+                      style: AppTextStyles.bd5.copyWith(color: AppColors.g40)),
+                  Gaps.v12,
+                  Wrap(
+                      spacing: 4,
+                      runSpacing: 4,
+                      children: listText.map((text) {
+                        return OrangeChips(thisText: text);
+                      }).toList()),
+                  Gaps.v24,
+                  const CustomDivider(thisHeight: 2),
+                  Gaps.v20,
+                  Gaps.v20,
+                  Text('건물 구조',
+                      style: AppTextStyles.bd5.copyWith(color: AppColors.g40)),
+                  Gaps.v8,
+                  //조건문 추가 필요
+                  Row(children: [
+                    Text('지붕의 형태: ',
+                        style:
+                            AppTextStyles.bd4.copyWith(color: AppColors.g80)),
+                    Text('호호',
+                        style: AppTextStyles.bd4.copyWith(color: AppColors.g80))
+                  ]),
+                  Row(children: [
+                    Text('외벽의 재질: ',
+                        style:
+                            AppTextStyles.bd4.copyWith(color: AppColors.g80)),
+                    Text('호호',
+                        style: AppTextStyles.bd4.copyWith(color: AppColors.g80))
+                  ]),
+                  //조건문 추가 필요
+                  Row(children: [
+                    Text('창문 및 문의 형태: ',
+                        style:
+                            AppTextStyles.bd4.copyWith(color: AppColors.g80)),
+                    Text('호호',
+                        style: AppTextStyles.bd4.copyWith(color: AppColors.g80))
+                  ]),
+                  Gaps.v50,
+                ],
+              ),
+            )
           ],
         ),
       ),
