@@ -8,12 +8,22 @@ class AppIcon {
       SvgPicture.asset('assets/icon/grey_pin.svg', fit: BoxFit.scaleDown);
   static Widget get back_arrow =>
       SvgPicture.asset('assets/icon/back_arrow.svg', fit: BoxFit.scaleDown);
+  static Widget get search =>
+      SvgPicture.asset('assets/icon/search.svg', fit: BoxFit.scaleDown);
+  static Widget get circle_fill_x =>
+      SvgPicture.asset('assets/icon/circle_fill_x.svg', fit: BoxFit.scaleDown);
 
-  // 새로운 phone 이미지 추가
+  //PNG 이미지
   static Widget get phone =>
       Image.asset('assets/images/phone.png', fit: BoxFit.scaleDown);
   static Widget get notice =>
       Image.asset('assets/images/notice.png', fit: BoxFit.scaleDown);
+  static Widget get img =>
+      Image.asset('assets/images/img.png', fit: BoxFit.scaleDown);
+  static Widget get location =>
+      Image.asset('assets/images/location.png', fit: BoxFit.scaleDown);
+  static Widget get magnifier =>
+      Image.asset('assets/images/magnifier.png', fit: BoxFit.scaleDown);
 
 //숫자 이미지_Grey
   static Widget get g_num_0 =>

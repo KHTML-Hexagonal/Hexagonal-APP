@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hexagonal_app/manage/constants/constants.dart';
 
-class HomeBuildingDetail extends StatefulWidget {
-  const HomeBuildingDetail({super.key});
+class OwnerRegComplete extends StatefulWidget {
+  const OwnerRegComplete({super.key});
 
   @override
-  State<HomeBuildingDetail> createState() => _HomeBuildingDetailState();
+  State<OwnerRegComplete> createState() => _OwnerRegCompleteState();
 }
 
-class _HomeBuildingDetailState extends State<HomeBuildingDetail> {
+class _OwnerRegCompleteState extends State<OwnerRegComplete> {
   final List<String> imageUrls = [
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXZh3-jbP0MTAbsWXm5SjX_tSYLYxWkrSnWg&s',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk5M5twYO4OrM_JGeJXMd2MsU9Xk9JdLE1mg&s',

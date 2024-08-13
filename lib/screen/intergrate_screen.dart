@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexagonal_app/manage/constants/constants.dart';
 import 'package:hexagonal_app/manage/constants/screen_manage.dart';
-import 'package:hexagonal_app/screen/test/test_home.dart';
 
 enum SwitchIndex {
   none,
@@ -86,7 +85,7 @@ class _IntergrateScreenState extends State<IntergrateScreen> {
       case 0:
         return const HomeMain();
       case 1:
-        return const TestHome();
+        return const SearchHome();
 
       case 2:
         return const SearchHome();

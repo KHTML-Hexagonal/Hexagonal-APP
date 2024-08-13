@@ -5,8 +5,9 @@ import 'package:hexagonal_app/manage/constants/constants.dart';
 class MapMarkerManager {
   final BuildContext context;
   final NaverMapController naverMapController;
+  final Function(String) onMarkerTap;
 
-  MapMarkerManager(this.context, this.naverMapController);
+  MapMarkerManager(this.context, this.naverMapController, this.onMarkerTap);
 
   Future<void> addMarkersToMapForObject(
       List<YonginBuildingModel> objectList) async {
@@ -37,7 +38,7 @@ class MapMarkerManager {
       );
 
       marker.setOnTapListener((NMarker marker) {
-        print('Tapped marker ID: ${marker.info.id}');
+        onMarkerTap('${marker.info.id}, ${marker.position}');
       });
 
       naverMapController.addOverlay(marker);

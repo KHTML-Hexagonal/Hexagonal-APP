@@ -35,9 +35,13 @@ class _HomeMainState extends State<HomeMain> {
     _addOldBuilding();
   }
 
+  void onMarkerTap(dynamic markerInfo) {
+    print('Tapped marker ID 집: $markerInfo');
+  }
+
   Future<void> _addOldBuilding() async {
     final mapController = await mapControllerCompleter.future;
-    final markerManager = MapMarkerManager(context, mapController);
+    final markerManager = MapMarkerManager(context, mapController, onMarkerTap);
     await markerManager.addMarkersToMapForObject(yongingBuilding);
   }
 
