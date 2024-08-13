@@ -20,8 +20,6 @@ dependencies:
   camera: ^0.9.8+1
   dio: ^5.5.0+1
   image_picker: ^1.1.2
-  flutter_secure_storage: ^9.2.2
-
 
 
 
@@ -40,6 +38,7 @@ flutter:
     - assets/images/num/
     - assets/images/num_orange/
     - assets/icon/
+    - assets/icon/gnb_part/
     - lib/manage/data/
     - .env
 

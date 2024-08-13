@@ -13,6 +13,35 @@ class AppIcon {
   static Widget get circle_fill_x =>
       SvgPicture.asset('assets/icon/circle_fill_x.svg', fit: BoxFit.scaleDown);
 
+  //Bottom Navigation part
+  static Widget get home_active =>
+      SvgPicture.asset('assets/icon/gnb_part/home_active.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get home_inactive =>
+      SvgPicture.asset('assets/icon/gnb_part/home_inactive.svg',
+          fit: BoxFit.scaleDown);
+
+  static Widget get inter_active =>
+      SvgPicture.asset('assets/icon/gnb_part/home_active.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get inter_inactive =>
+      SvgPicture.asset('assets/icon/gnb_part/home_inactive.svg',
+          fit: BoxFit.scaleDown);
+
+  static Widget get location_active =>
+      SvgPicture.asset('assets/icon/gnb_part/location_active.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get location_inactive =>
+      SvgPicture.asset('assets/icon/gnb_part/location_inactive.svg',
+          fit: BoxFit.scaleDown);
+
+  static Widget get my_active =>
+      SvgPicture.asset('assets/icon/gnb_part/my_active.svg',
+          fit: BoxFit.scaleDown);
+  static Widget get my_inactive =>
+      SvgPicture.asset('assets/icon/gnb_part/my_inactive.svg',
+          fit: BoxFit.scaleDown);
+
   //PNG 이미지
   static Widget get phone =>
       Image.asset('assets/images/phone.png', fit: BoxFit.scaleDown);

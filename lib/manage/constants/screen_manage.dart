@@ -14,3 +14,10 @@ export 'package:hexagonal_app/screen/owner/owner_reg_1.dart';
 export 'package:hexagonal_app/screen/owner/owner_reg_2.dart';
 export 'package:hexagonal_app/screen/owner/owner_reg_3.dart';
 export 'package:hexagonal_app/screen/owner/owner_reg_complete.dart';
+
+//건축 자재 화면
+export 'package:hexagonal_app/screen/construction_material/material_intergrate.dart';
+export 'package:hexagonal_app/screen/construction_material/material_reg_1.dart';
+export 'package:hexagonal_app/screen/construction_material/material_reg_2.dart';
+export 'package:hexagonal_app/screen/construction_material/material_reg_3.dart';
+export 'package:hexagonal_app/screen/construction_material/material_reg_complete.dart';

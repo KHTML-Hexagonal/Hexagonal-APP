@@ -16,6 +16,7 @@ export 'package:hexagonal_app/widget/number_widget/number_orange.dart';
 export 'package:hexagonal_app/widget/chips/orange_chips.dart';
 export 'package:hexagonal_app/widget/top_appbar/topappbar_component.dart';
 export 'package:hexagonal_app/widget/list/reg_image_list.dart';
+export 'package:hexagonal_app/widget/chips/grey_chips.dart';
 
 //api관리
 export 'package:hexagonal_app/manage/api/naver_map_api.dart';
