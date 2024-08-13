@@ -12,25 +12,8 @@ class MapMarkerManager {
   Future<void> addMarkersToMapForObject(
       List<YonginBuildingModel> objectList) async {
     for (var place in objectList) {
-      final NOverlayImage objectMarker = await NOverlayImage.fromWidget(
-        widget: SizedBox(
-          width: 46,
-          height: 65,
-          child: Stack(
-            children: [
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: AppIcon.grey_pin,
-              ),
-            ],
-          ),
-        ),
-        size: const Size(46, 65),
-        context: context,
-      );
-
+      const NOverlayImage objectMarker =
+          NOverlayImage.fromAssetImage('assets/images/grey_pin.png');
       final marker = NMarker(
         id: place.gisBuildingId!,
         position: NLatLng(place.latitude!, place.longitude!),

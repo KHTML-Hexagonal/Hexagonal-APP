@@ -20,6 +20,8 @@ export 'package:hexagonal_app/widget/chips/grey_chips.dart';
 
 //api관리
 export 'package:hexagonal_app/manage/api/naver_map_api.dart';
+export 'package:hexagonal_app/manage/api/server_api.dart';
 
 //모델 관리
 export 'package:hexagonal_app/manage/model/yongin_cords_model.dart';
+export 'package:hexagonal_app/manage/model/building_reg_model.dart';

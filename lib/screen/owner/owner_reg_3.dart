@@ -4,15 +4,18 @@ import 'package:image_picker/image_picker.dart';
 
 class OwnerReg3 extends StatefulWidget {
   final VoidCallback onNavigateForward;
-
   final List<XFile> storedImages;
   final String addressText;
+  final BuildingRegistrationResponse response;
+  final bool isLoading;
 
   const OwnerReg3({
     super.key,
     required this.storedImages,
     required this.addressText,
     required this.onNavigateForward,
+    required this.response,
+    required this.isLoading,
   });
 
   @override

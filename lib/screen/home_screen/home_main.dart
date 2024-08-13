@@ -24,7 +24,7 @@ class _HomeMainState extends State<HomeMain> {
   @override
   void initState() {
     super.initState();
-    // _loadAndAddOldBuilding();
+    _loadAndAddOldBuilding();
     _addPolygonOverlay();
   }
 
@@ -101,8 +101,8 @@ class _HomeMainState extends State<HomeMain> {
       id: 'maskOverlay',
       coords: outerCoords, // 외곽선 좌표
       holes: [holeCoords], // yonginCoords를 holes로 설정
-      color: AppColors.g80.withOpacity(0.9),
-      outlineColor: AppColors.g80.withOpacity(0.3), // 외곽선 색상
+      color: AppColors.g80.withOpacity(0.2),
+      outlineColor: Colors.transparent,
       outlineWidth: 3, // 외곽선 두께
     );
 
