@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:hexagonal_app/manage/constants/constants.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class OwnerRegComplete extends StatefulWidget {
-  const OwnerRegComplete({super.key});
+  final BuildingRegistrationResponse response;
+  final List<XFile> storedImages;
+  final String thisUniqueId;
+  final String addressText;
+
+  const OwnerRegComplete({
+    super.key,
+    required this.response,
+    required this.thisUniqueId,
+    required this.storedImages,
+    required this.addressText,
+  });
 
   @override
   State<OwnerRegComplete> createState() => _OwnerRegCompleteState();
 }
 
 class _OwnerRegCompleteState extends State<OwnerRegComplete> {
-  final List<String> imageUrls = [
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXZh3-jbP0MTAbsWXm5SjX_tSYLYxWkrSnWg&s',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk5M5twYO4OrM_JGeJXMd2MsU9Xk9JdLE1mg&s',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzCk4Xm2Xo0Xdo5f34uw-svRzqSKAOhxqMFQ&s'
-  ]; // 여러 개의 이미지 URL
-
-  final List<String> listText = ['안녕', '하늘', '곰마', '안녕', '하늘', '곰마', '안녕'];
-
   @override
   Widget build(BuildContext context) {
+    final buildingData = widget.response.data;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -32,10 +39,10 @@ class _OwnerRegCompleteState extends State<OwnerRegComplete> {
                       height:
                           MediaQuery.of(context).size.width, // 1:1 비율을 위한 설정
                       child: PageView.builder(
-                          itemCount: imageUrls.length,
+                          itemCount: widget.storedImages.length,
                           itemBuilder: (context, index) {
-                            return Image.network(
-                              imageUrls[index],
+                            return Image.file(
+                              File(widget.storedImages[index].path),
                               fit: BoxFit.cover,
                             );
                           })),
@@ -63,11 +70,12 @@ class _OwnerRegCompleteState extends State<OwnerRegComplete> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('처인구 삼가동, 185-7',
+                      Text(widget.addressText,
                           style:
                               AppTextStyles.st2.copyWith(color: AppColors.g80)),
                       Gaps.v16,
-                      Row(
+                      if (buildingData.conditionReason.isNotEmpty)
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
@@ -82,32 +90,35 @@ class _OwnerRegCompleteState extends State<OwnerRegComplete> {
                                   decoration: BoxDecoration(
                                       color: AppColors.g10,
                                       borderRadius: BorderRadius.circular(8)),
-                                  child: Text('하하호호\najajjaj\n먼엄넝ㅁ너ㅓ',
+                                  child: Text(buildingData.conditionReason,
                                       style: AppTextStyles.bd4
                                           .copyWith(color: AppColors.g80))),
                             )
-                          ]),
+                          ],
+                        ),
                       Gaps.v16,
-                      Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 24,
-                              child: AppIcon.phone,
-                            ),
-                            Gaps.h8,
-                            Expanded(
-                              child: Container(
-                                  width: double.infinity,
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      color: AppColors.g10,
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: Text('집주인님 전화번호',
-                                      style: AppTextStyles.bd4
-                                          .copyWith(color: AppColors.g80))),
-                            )
-                          ]),
+                      // if (buildingData.phoneNumber?.isNotEmpty ?? false)
+                      //   Row(
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       SizedBox(
+                      //         width: 24,
+                      //         child: AppIcon.phone,
+                      //       ),
+                      //       Gaps.h8,
+                      //       Expanded(
+                      //         child: Container(
+                      //             width: double.infinity,
+                      //             padding: const EdgeInsets.all(10),
+                      //             decoration: BoxDecoration(
+                      //                 color: AppColors.g10,
+                      //                 borderRadius: BorderRadius.circular(8)),
+                      //             child: Text(buildingData.phoneNumber!,
+                      //                 style: AppTextStyles.bd4
+                      //                     .copyWith(color: AppColors.g80))),
+                      //       )
+                      //     ],
+                      //   ),
                     ],
                   ),
                 ),
@@ -120,16 +131,26 @@ class _OwnerRegCompleteState extends State<OwnerRegComplete> {
                       style: AppTextStyles.st1.copyWith(color: AppColors.g80),
                     )),
                 Gaps.v16,
-                const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12),
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          NumberWidget(thisNumber: 97, thisText: '균열'),
-                          NumberWidget(thisNumber: 97, thisText: '누수'),
-                          NumberWidget(thisNumber: 97, thisText: '부식'),
-                          NumberWidget(thisNumber: 97, thisText: '노후화'),
-                          NumberOrangeWidget(thisNumber: 97, thisText: '총점')
+                          NumberWidget(
+                              thisNumber: buildingData.crackScore,
+                              thisText: '균열'),
+                          NumberWidget(
+                              thisNumber: buildingData.leakScore,
+                              thisText: '누수'),
+                          NumberWidget(
+                              thisNumber: buildingData.corrosionScore,
+                              thisText: '부식'),
+                          NumberWidget(
+                              thisNumber: buildingData.agingScore,
+                              thisText: '노후화'),
+                          NumberOrangeWidget(
+                              thisNumber: buildingData.totalScore,
+                              thisText: '총점')
                         ])),
                 Container(
                   padding: const EdgeInsets.all(24),
@@ -145,43 +166,54 @@ class _OwnerRegCompleteState extends State<OwnerRegComplete> {
                       Wrap(
                           spacing: 4,
                           runSpacing: 4,
-                          children: listText.map((text) {
+                          children:
+                              buildingData.repairList.split(', ').map((text) {
                             return OrangeChips(thisText: text);
                           }).toList()),
                       Gaps.v24,
                       const CustomDivider(thisHeight: 2),
                       Gaps.v20,
-                      Gaps.v20,
-                      Text('건물 구조',
-                          style:
-                              AppTextStyles.bd5.copyWith(color: AppColors.g40)),
-                      Gaps.v8,
-                      //조건문 추가 필요
-                      Row(children: [
-                        Text('지붕의 형태: ',
-                            style: AppTextStyles.bd4
-                                .copyWith(color: AppColors.g80)),
-                        Text('호호',
-                            style: AppTextStyles.bd4
-                                .copyWith(color: AppColors.g80))
-                      ]),
-                      Row(children: [
-                        Text('외벽의 재질: ',
-                            style: AppTextStyles.bd4
-                                .copyWith(color: AppColors.g80)),
-                        Text('호호',
-                            style: AppTextStyles.bd4
-                                .copyWith(color: AppColors.g80))
-                      ]),
-                      //조건문 추가 필요
-                      Row(children: [
-                        Text('창문 및 문의 형태: ',
-                            style: AppTextStyles.bd4
-                                .copyWith(color: AppColors.g80)),
-                        Text('호호',
-                            style: AppTextStyles.bd4
-                                .copyWith(color: AppColors.g80))
-                      ]),
+                      if (buildingData.roofMaterial.isNotEmpty ||
+                          buildingData.wallMaterial.isNotEmpty ||
+                          buildingData.windowDoorMaterial.isNotEmpty)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('건물 구조',
+                                style: AppTextStyles.bd5
+                                    .copyWith(color: AppColors.g40)),
+                            Gaps.v8,
+                            if (buildingData.roofMaterial.isNotEmpty)
+                              Row(children: [
+                                Text('지붕의 형태: ',
+                                    style: AppTextStyles.bd4
+                                        .copyWith(color: AppColors.g80)),
+                                Text(buildingData.roofMaterial,
+                                    style: AppTextStyles.bd4
+                                        .copyWith(color: AppColors.g80))
+                              ]),
+                            Gaps.v8,
+                            if (buildingData.wallMaterial.isNotEmpty)
+                              Row(children: [
+                                Text('외벽의 재질: ',
+                                    style: AppTextStyles.bd4
+                                        .copyWith(color: AppColors.g80)),
+                                Text(buildingData.wallMaterial,
+                                    style: AppTextStyles.bd4
+                                        .copyWith(color: AppColors.g80))
+                              ]),
+                            Gaps.v8,
+                            if (buildingData.windowDoorMaterial.isNotEmpty)
+                              Row(children: [
+                                Text('창문 및 문의 형태: ',
+                                    style: AppTextStyles.bd4
+                                        .copyWith(color: AppColors.g80)),
+                                Text(buildingData.windowDoorMaterial,
+                                    style: AppTextStyles.bd4
+                                        .copyWith(color: AppColors.g80))
+                              ]),
+                          ],
+                        ),
                       Gaps.v50,
                     ],
                   ),

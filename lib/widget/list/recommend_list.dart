@@ -2,28 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:hexagonal_app/manage/constants/constants.dart';
 import 'package:hexagonal_app/manage/constants/screen_manage.dart';
 
-class RecommendServiceList extends StatefulWidget {
+class RecommendServiceList extends StatelessWidget {
   final String thisUniqueBuildingId;
+  final String thisImageUrl;
+  final String thisBuildingName;
+  final List<String> listText;
 
   const RecommendServiceList({
     super.key,
     required this.thisUniqueBuildingId,
+    required this.thisImageUrl,
+    required this.thisBuildingName,
+    required this.listText,
   });
-
-  @override
-  State<RecommendServiceList> createState() => _RecommendServiceListState();
-}
-
-class _RecommendServiceListState extends State<RecommendServiceList> {
-  final List<String> listText = [
-    '안녕',
-    '하늘',
-    '곰마',
-    '안녕',
-    '하늘',
-    '곰마',
-    '안녕',
-  ]; // 예시 데이터
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +23,9 @@ class _RecommendServiceListState extends State<RecommendServiceList> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeBuildingDetail(),
+            builder: (context) => HomeBuildingDetail(
+              thisUniqueBuildingId: thisUniqueBuildingId,
+            ),
           ),
         );
       },
@@ -49,7 +42,7 @@ class _RecommendServiceListState extends State<RecommendServiceList> {
                 color: Colors.grey,
               ),
               child: Image.network(
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXZh3-jbP0MTAbsWXm5SjX_tSYLYxWkrSnWg&s',
+                thisImageUrl,
                 fit: BoxFit.cover,
               ),
             ),
@@ -59,7 +52,7 @@ class _RecommendServiceListState extends State<RecommendServiceList> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '처인구 삼가동, 185-7',
+                    thisBuildingName,
                     style: AppTextStyles.bd1.copyWith(color: AppColors.g80),
                   ),
                   Gaps.v7,

@@ -19,13 +19,27 @@ class _HomeMainState extends State<HomeMain> {
   // 외곽선을 그리기 위한 좌표 리스트 정의 (일반 리스트)
   final List<List<double>> coords = yonginCoords;
   List<YonginBuildingModel> yongingBuilding = [];
-  int itemCount = 4;
+  List<RecommendBuildingModel> recommendBuildings = [];
 
   @override
   void initState() {
     super.initState();
     _loadAndAddOldBuilding();
     _addPolygonOverlay();
+    fetchRecommendData();
+  }
+
+// 추천 데이터를 가져오는 메소드
+  Future<void> fetchRecommendData() async {
+    try {
+      final response = await ServerApi.getRecommendData();
+      setState(() {
+        recommendBuildings = response; // 추천 데이터를 저장
+      });
+      print('추천 데이터 가져오기 성공: ${recommendBuildings.length}개의 항목을 가져왔습니다.');
+    } catch (e) {
+      print('추천 데이터 가져오기 실패: $e');
+    }
   }
 
   Future<void> _loadAndAddOldBuilding() async {
@@ -109,7 +123,7 @@ class _HomeMainState extends State<HomeMain> {
     mapController.addOverlay(polygonOverlay); // 오버레이 추가
   }
 
-  Widget dangerListModal() {
+  Widget listModal() {
     return DraggableScrollableSheet(
       snap: true,
       minChildSize: 0.35,
@@ -138,13 +152,18 @@ class _HomeMainState extends State<HomeMain> {
                             AppTextStyles.st2.copyWith(color: AppColors.g80)),
                     Gaps.v8,
                     ...List.generate(
-                      itemCount,
+                      recommendBuildings.length,
                       (index) => Column(
                         children: [
-                          const RecommendServiceList(
-                            thisUniqueBuildingId: '123123',
+                          RecommendServiceList(
+                            thisUniqueBuildingId:
+                                recommendBuildings[index].buildingId,
+                            thisImageUrl: recommendBuildings[index].imageUrl,
+                            thisBuildingName: recommendBuildings[index].address,
+                            listText:
+                                recommendBuildings[index].repairList.split(','),
                           ),
-                          if (index < itemCount - 1)
+                          if (index < recommendBuildings.length - 1)
                             const CustomDivider(thisHeight: 1)
                         ],
                       ),
@@ -196,7 +215,7 @@ class _HomeMainState extends State<HomeMain> {
               height: MediaQuery.of(context).size.height * 0.65,
               child: _buildNaverMap(),
             ),
-            dangerListModal(),
+            listModal(),
           ],
         ),
       ),

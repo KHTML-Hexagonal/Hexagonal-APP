@@ -23,11 +23,10 @@ class OwnerReg3 extends StatefulWidget {
 }
 
 class _OwnerReg3State extends State<OwnerReg3> {
-  final List<String> listText = ['안녕', '하늘', '곰마', '안녕', '하늘', '곰마', '안녕'];
-  bool isLoading = true;
-
   @override
   Widget build(BuildContext context) {
+    final buildingData = widget.response.data;
+
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
@@ -35,7 +34,7 @@ class _OwnerReg3State extends State<OwnerReg3> {
           text: '내 집 등록',
           thisTextStyle: AppTextStyles.st2.copyWith(color: AppColors.g6),
         ),
-        body: isLoading
+        body: widget.isLoading
             ? const Center(
                 child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(AppColors.g20)))
@@ -79,11 +78,9 @@ class _OwnerReg3State extends State<OwnerReg3> {
                               ])),
                           Gaps.h16,
                           ...widget.storedImages.map((file) {
-                            // 스프레드 연산자 사용
                             int index = widget.storedImages.indexOf(file);
                             return RegImageList(
-                              key: ValueKey(file
-                                  .path), // key를 파일 경로로 설정하여 더 나은 성능과 구분을 제공
+                              key: ValueKey(file.path),
                               file: file,
                               storeArea: widget.storedImages,
                               index: index,
@@ -143,21 +140,27 @@ class _OwnerReg3State extends State<OwnerReg3> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      NumberWidget(
-                                          thisNumber: 97, thisText: '균열'),
-                                      NumberWidget(
-                                          thisNumber: 97, thisText: '누수'),
-                                      NumberWidget(
-                                          thisNumber: 97, thisText: '부식'),
-                                      NumberWidget(
-                                          thisNumber: 97, thisText: '노후화'),
-                                      NumberOrangeWidget(
-                                          thisNumber: 97, thisText: '총점')
-                                    ]),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    NumberWidget(
+                                        thisNumber: buildingData.crackScore,
+                                        thisText: '균열'),
+                                    NumberWidget(
+                                        thisNumber: buildingData.leakScore,
+                                        thisText: '누수'),
+                                    NumberWidget(
+                                        thisNumber: buildingData.corrosionScore,
+                                        thisText: '부식'),
+                                    NumberWidget(
+                                        thisNumber: buildingData.agingScore,
+                                        thisText: '노후화'),
+                                    NumberOrangeWidget(
+                                        thisNumber: buildingData.totalScore,
+                                        thisText: '총점')
+                                  ],
+                                ),
                                 Gaps.v22,
                                 const CustomDividerWhite(thisHeight: 2),
                                 Gaps.v22,
@@ -166,11 +169,14 @@ class _OwnerReg3State extends State<OwnerReg3> {
                                         .copyWith(color: AppColors.g40)),
                                 Gaps.v12,
                                 Wrap(
-                                    spacing: 4,
-                                    runSpacing: 4,
-                                    children: listText.map((text) {
-                                      return OrangeChips(thisText: text);
-                                    }).toList()),
+                                  spacing: 4,
+                                  runSpacing: 4,
+                                  children: buildingData.repairList
+                                      .split(', ')
+                                      .map((text) {
+                                    return OrangeChips(thisText: text);
+                                  }).toList(),
+                                ),
                                 Gaps.v22,
                                 const CustomDividerWhite(thisHeight: 2),
                                 Gaps.v22,
@@ -178,32 +184,35 @@ class _OwnerReg3State extends State<OwnerReg3> {
                                     style: AppTextStyles.bd5
                                         .copyWith(color: AppColors.g40)),
                                 Gaps.v8,
-                                //조건문 추가 필요
-                                Row(children: [
-                                  Text('지붕의 형태: ',
-                                      style: AppTextStyles.bd4
-                                          .copyWith(color: AppColors.g80)),
-                                  Text('호호',
-                                      style: AppTextStyles.bd4
-                                          .copyWith(color: AppColors.g80))
-                                ]),
-                                Row(children: [
-                                  Text('외벽의 재질: ',
-                                      style: AppTextStyles.bd4
-                                          .copyWith(color: AppColors.g80)),
-                                  Text('호호',
-                                      style: AppTextStyles.bd4
-                                          .copyWith(color: AppColors.g80))
-                                ]),
-                                //조건문 추가 필요
-                                Row(children: [
-                                  Text('창문 및 문의 형태: ',
-                                      style: AppTextStyles.bd4
-                                          .copyWith(color: AppColors.g80)),
-                                  Text('호호',
-                                      style: AppTextStyles.bd4
-                                          .copyWith(color: AppColors.g80))
-                                ]),
+                                if (buildingData.roofMaterial.isNotEmpty)
+                                  Row(children: [
+                                    Text('지붕의 형태: ',
+                                        style: AppTextStyles.bd4
+                                            .copyWith(color: AppColors.g80)),
+                                    Text(buildingData.roofMaterial,
+                                        style: AppTextStyles.bd4
+                                            .copyWith(color: AppColors.g80))
+                                  ]),
+                                Gaps.v8,
+                                if (buildingData.wallMaterial.isNotEmpty)
+                                  Row(children: [
+                                    Text('외벽의 재질: ',
+                                        style: AppTextStyles.bd4
+                                            .copyWith(color: AppColors.g80)),
+                                    Text(buildingData.wallMaterial,
+                                        style: AppTextStyles.bd4
+                                            .copyWith(color: AppColors.g80))
+                                  ]),
+                                Gaps.v8,
+                                if (buildingData.windowDoorMaterial.isNotEmpty)
+                                  Row(children: [
+                                    Text('창문 및 문의 형태: ',
+                                        style: AppTextStyles.bd4
+                                            .copyWith(color: AppColors.g80)),
+                                    Text(buildingData.windowDoorMaterial,
+                                        style: AppTextStyles.bd4
+                                            .copyWith(color: AppColors.g80))
+                                  ]),
                               ],
                             ),
                           ),

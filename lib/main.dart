@@ -64,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const OwnerIntergrate(),
+            builder: (context) => const MaterialIntergrate(),
           ),
         );
         SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

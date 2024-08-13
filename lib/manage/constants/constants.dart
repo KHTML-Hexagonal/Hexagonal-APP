@@ -25,3 +25,5 @@ export 'package:hexagonal_app/manage/api/server_api.dart';
 //모델 관리
 export 'package:hexagonal_app/manage/model/yongin_cords_model.dart';
 export 'package:hexagonal_app/manage/model/building_reg_model.dart';
+export 'package:hexagonal_app/manage/model/building_recommend_model.dart';
+export 'package:hexagonal_app/manage/model/building_detail_model.dart';

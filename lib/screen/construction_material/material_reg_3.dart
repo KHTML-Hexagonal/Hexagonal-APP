@@ -20,8 +20,23 @@ class MaterialReg3 extends StatefulWidget {
 }
 
 class _MaterialReg3State extends State<MaterialReg3> {
-  final List<String> listText = ['안녕', '하늘', '곰마', '안녕', '하늘', '곰마', '안녕'];
-  bool isLoading = false;
+  final List<String> listText = ['나무판자', '목재'];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _changeLoading(); // 화면에 진입하는 순간부터 _changeLoading 실행
+  }
+
+  // 5초 뒤에 isLoading을 false로 변경하는 메소드
+  void _changeLoading() {
+    Future.delayed(const Duration(seconds: 15), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +152,7 @@ class _MaterialReg3State extends State<MaterialReg3> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('보수 필요 항목',
+                                Text('건축 자재 구분',
                                     style: AppTextStyles.bd5
                                         .copyWith(color: AppColors.g40)),
                                 Gaps.v12,
@@ -154,7 +169,8 @@ class _MaterialReg3State extends State<MaterialReg3> {
                                     style: AppTextStyles.bd5
                                         .copyWith(color: AppColors.g40)),
                                 Gaps.v8,
-                                Text('지붕의 형태: ',
+                                Text(
+                                    '1. 나무 판자를 사용해 낡은 벽체를 보강하거나 새로운 외벽을 추가하여 건물의 구조적 안정성을 높일 수 있습니다\n\n2. 천장이나 바닥을 나무 판자로 덮어 단열 효과를 개선하고, 미관을 향상시킬 수 있습니다.\n\n3. 내부 인테리어의 목재 마감재로 활용해 공간에 따뜻한 느낌을 주며, 오래된 건물에 현대적인 감각을 더할 수 있습니다.',
                                     style: AppTextStyles.bd4
                                         .copyWith(color: AppColors.g80)),
                               ],

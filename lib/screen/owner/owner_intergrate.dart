@@ -22,6 +22,7 @@ class _OwnerIntergrateState extends State<OwnerIntergrate> {
   Future<void> registerHouse() async {
     setState(() {
       isLoading = true;
+      _currentIndex = 2;
     });
     try {
       // 이미지 파일들을 MultipartFile로 변환
@@ -38,15 +39,11 @@ class _OwnerIntergrateState extends State<OwnerIntergrate> {
       setState(() {
         isLoading = false;
       });
-
-      // 데이터 수신 후 화면 전환
-      setState(() {
-        _currentIndex = 2;
-      });
     } catch (e) {
       print('등록 실패: $e');
       setState(() {
         isLoading = false;
+        _currentIndex = 1;
       });
       // 오류 처리 (필요 시 다이얼로그나 스낵바를 사용하여 사용자에게 알림)
     }
@@ -55,14 +52,14 @@ class _OwnerIntergrateState extends State<OwnerIntergrate> {
   // 화면 전환 함수
   void switchScreen(int index) {
     if (index == 3) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const OwnerRegComplete()));
-    } else if (index == 2) {
-      if (!isLoading && response != null) {
-        setState(() {
-          _currentIndex = index;
-        });
-      }
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => OwnerRegComplete(
+                  response: response!,
+                  thisUniqueId: uniqueId,
+                  storedImages: image,
+                  addressText: addressText)));
     } else {
       setState(() {
         _currentIndex = index;

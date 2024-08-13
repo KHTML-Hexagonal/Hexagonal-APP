@@ -22,7 +22,7 @@ class _MaterialIntergrateState extends State<MaterialIntergrate> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const OwnerRegComplete(),
+          builder: (context) => const MaterialRegComplete(),
         ),
       );
     }
